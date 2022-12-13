@@ -27,51 +27,22 @@ export class Newscomp extends Component {
     this.setState({loading:true})
     let data=await fetch(url);
     let parsedata= await data.json();
-    console.log(parsedata);
     this.setState({articles: parsedata.articles,
       totalResults:parsedata.totalResults,
       loading:false})
   }
 
   async componentDidMount(){
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a293d476cee45aab7c6980858cc9509&page=1&pagesize=${this.props.pageSize}`
-    this.setState({loading:true})
-    let data=await fetch(url);
-    let parsedata= await data.json();
-    console.log(parsedata);
-    this.setState({articles: parsedata.articles,
-      totalResults:parsedata.totalResults,
-      loading:false})
+    this.updatenews();
   }
 
    handlenxtbtn= async()=>{
-    // if (!(this.state.page+1 > Math.ceil(this.state.totalResults/this.props.pageSize))) {
-    //     let url=` https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a293d476cee45aab7c6980858cc9509&page=${this.state.page+1}&pagesize=${this.props.pageSize}`;
-    //     this.setState({loading:true})
-    //     let data=await fetch(url);
-    //   let parsedata= await data.json();
-    //   this.setState({
-    //     page:this.state.page+1,
-    //     articles: parsedata.articles,
-    //     loading:false
-    //   })
-    // }
     this.setState({page: this.state.page+1});
     this.updatenews(); 
 
   }
 
   handleprebtn= async()=>{
-  //   let url=` https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a293d476cee45aab7c6980858cc9509&page=${this.state.page-1}&pagesize=${this.props.pageSize}`;
-  //   this.setState({loading:true})
-  //   let data=await fetch(url);
-  //   let parsedata= await data.json();
-  //   console.log(parsedata);
-  //   this.setState({
-  //     page:this.state.page-1,
-  //     articles: parsedata.articles,
-  //     loading:false
-  //  })
    this.setState({page: this.state.page-1})
    this.updatenews();
   }

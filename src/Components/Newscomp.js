@@ -10,16 +10,19 @@ export class Newscomp extends Component {
     category:'genral',
   }
 
-  
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
       articles:[],
       loading:false,
       page:1
     }
+    document.title=`${this.capitalizeFirstLetter(this.props.category)} - NewsZone`;
   }
 
   async updatenews(){
@@ -55,7 +58,7 @@ export class Newscomp extends Component {
         <div className="row">
           {!this.state.loading && this.state.articles.map((element)=>{
             return <div className="col-md-4" key={element.url}>
-            <Newsitem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,88):""}  imgurl={element.urlToImage} newsurl={element.url} author={element.author} date={element.publishedAt} src={element.source.name}/>
+            <Newsitem  title={element.title} description={element.description?element.description.slice(0,88):""}  imgurl={element.urlToImage} newsurl={element.url} author={element.author} date={element.publishedAt} src={element.source.name}/>
             </div>
           })}
           
